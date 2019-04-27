@@ -1,0 +1,59 @@
+ion-toolbar {
+  // TODO test transparent and fullscreen
+  --background: transparent;
+  --border-color: transparent;
+}
+
+.swiper-slide {
+  display: block;
+}
+
+.slide-title {
+  margin-top: 2.5rem;
+}
+
+.slide-image {
+  max-height: 50%;
+  max-width: 50%;
+  margin: 25px 0;
+}
+
+b {
+  font-weight: 500;
+}
+
+p {
+  padding: 0 40px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #60646b;
+
+  b {
+    color: #000000;
+  }
+}
+
+.tutorial{
+  --background: linear-gradient(-45deg, #2f304c , #2f304c);
+  ul{
+    padding-inline-start: 20px;
+    padding-left: 20px;
+    list-style-type: none;
+    padding-left: 1em;
+  }
+  li {
+    color: #f7f7f7;
+    text-align: left;
+    font-size: 14px;
+    line-height: 23px;
+    margin-bottom: 18px;
+  }
+  li:before{
+    content: "-";
+position: absolute;
+margin-left: -1em;
+  }
+  h2, p, b{
+    color: #FFF;
+  }
+}

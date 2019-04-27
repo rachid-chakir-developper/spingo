@@ -1,0 +1,16 @@
+.reservations{
+    ion-item-options{
+        --ion-color-primary:#036;
+    }
+    .isActive{
+        --background:#ecfde9;
+    }
+
+    .isCanceled{
+        --background:#fff5f6;
+    }
+
+    .isInProgress{
+        --background: #fffdda;
+    }
+}

@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Charges
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button  routerLink="/app/tabs/charges/add">
+          <ion-icon name="add"></ion-icon> Ajouter
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-searchbar color="light" placeholder="Recherche" (ionChange)="filterCharges()" [(ngModel)]="queryText"></ion-searchbar>
+    <ion-segment [(ngModel)]="segment" (ionChange)="filterCharges()" padding-start padding-end padding-bottom mode="ios">
+        <ion-segment-button value="all" mode="ios">
+            <ion-text color="light">Tous</ion-text>
+          </ion-segment-button>
+        <ion-segment-button value="vehicule" mode="ios">
+          <ion-text color="light">Véhicules</ion-text>
+        </ion-segment-button>
+        <ion-segment-button value="societe" mode="ios">
+            <ion-text color="light">Société</ion-text>
+        </ion-segment-button>
+      </ion-segment>
+  </ion-header>
+
+<ion-content class="charges">
+
+    <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let c of charges">
+          <ion-item no-padding [class.isCompany]="c.reservation !== null" [class.isCar]="c.reservation === null" 
+                                 routerLink="/app/tabs/charges/show/{{c.id}}">
+              <ion-label padding-start padding-end>
+                  <h2>{{c.libelle | titlecase}}</h2>
+                  <h3>{{c.datecharge}} - {{c.typereglement}}</h3>
+                  <p>
+                    <span *ngIf="c.vehicule && c.vehicule !== null"> {{ c.vehicule.marque }} ( {{ c.vehicule.matricule }} ) - </span>
+                    <span *ngIf="!(c.vehicule && c.vehicule !== null)"> Société  ( {{c.libelle | titlecase }} ) - </span>
+                    <strong>{{c.montant}} Dhs</strong></p>
+                </ion-label>
+                <ion-icon slot="end" name="swap"></ion-icon>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option><ion-icon name="create" size="large" routerLink="/app/tabs/charges/edit/{{c.id}}"></ion-icon></ion-item-option>
+          </ion-item-options>
+          <ion-item-options side="start">
+            <ion-item-option (click)="presentAlertConfirm(c)" color="danger"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+
+      <ion-infinite-scroll *ngIf="hasMore" threshold="100px" (ionInfinite)="getMoreCharges($event)">
+          <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Chargement en cours...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+</ion-content>

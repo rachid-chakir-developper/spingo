@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Disponibilité
+    </ion-title>
+    
+  </ion-toolbar>
+  <ion-searchbar color="light" placeholder="Recherche" (ionChange)="filterCar()" [(ngModel)]="queryText"></ion-searchbar>
+</ion-header>
+
+<ion-content class="disponibilites">
+
+
+      <ion-card *ngFor="let calendar of calendarShow">
+          <ion-card-header>
+            <ion-card-title>
+            <ion-item lines="none" mode="ios">
+                <ion-avatar slot="start">
+                  <ion-icon name="car" size="large"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                    {{calendar.vehicule.designation}} ({{calendar.vehicule.matricule}})
+                </ion-label>
+              </ion-item>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content no-padding>
+              <ion-grid no-padding>
+                  <ion-row>
+                      <ion-col text-center class="bold">L</ion-col>
+                      <ion-col text-center class="bold">M</ion-col>
+                      <ion-col text-center class="bold">M</ion-col>
+                      <ion-col text-center class="bold">J</ion-col>
+                      <ion-col text-center class="bold">V</ion-col>
+                      <ion-col text-center class="bold">S</ion-col>
+                      <ion-col text-center class="bold">D</ion-col>
+                    </ion-row>
+                  <ion-row *ngFor="let week of calendar.calendar">
+                      <ion-col text-center *ngFor="let c of week" [class.isReserved]="c.nbrReserved == 1"
+                              [class.isReserved2]="c.nbrReserved == 2" (click) = "showDetails($event, c.reservations)" >
+                        {{ c.day }}
+                      </ion-col>
+                  </ion-row>
+                </ion-grid>
+          </ion-card-content>
+        </ion-card>
+
+</ion-content> 
+<ion-footer>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-button (click)="previousMonth()">
+            <ion-icon name="arrow-back"></ion-icon> Précédent
+          </ion-button>
+        </ion-buttons>
+    <ion-title>{{monthsNames[thisMonth]}} 2019</ion-title>
+    <ion-buttons slot="end">
+        <ion-button (click)="nextMonth()">
+          Suivant <ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

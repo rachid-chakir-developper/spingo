@@ -1,0 +1,223 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()"><ion-icon name="close" size="large"></ion-icon></ion-button>
+          </ion-buttons>
+        <ion-title>
+            Ajouter client
+        </ion-title>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content class="popupClient">
+    <form [formGroup]="formCreateClient" (ngSubmit)="createClient()">
+    
+        <ion-grid no-padding>
+            <ion-item-divider no-padding>
+                <ion-label>
+                  Informations personnelles
+                </ion-label>
+              </ion-item-divider>
+          <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.prenom">
+                  <ion-label  position="floating">Prénom</ion-label>
+                  <ion-input type="text" formControlName="prenom"></ion-input>
+                </ion-item>
+                <small>{{formErrors?.prenom}}</small>
+            </ion-col>
+            <ion-col>
+              <ion-item [class.error]="formErrors?.nom">
+                <ion-label position="floating">Nom</ion-label>  
+                <ion-input type="text" formControlName="nom"></ion-input>
+              </ion-item>
+              <small>{{formErrors?.nom}}</small>
+            </ion-col>
+          </ion-row>
+    
+          <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.dateNaissance">
+                    <ion-label position="floating">Date naissance<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>
+                    <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateNaissance"></ion-datetime>
+                  </ion-item>
+                  <small>{{formErrors?.dateNaissance}}</small>
+            </ion-col>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.nationalite">
+                    <ion-label position="floating">Nationnalité</ion-label>  
+                    <ion-input type="text" formControlName="nationalite"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.nationalite}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.email">
+                      <ion-label position="floating">Email</ion-label>
+                      <ion-input type="email" formControlName="email"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.email}}</small>
+              </ion-col>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.telephone">
+                      <ion-label position="floating">Téléphone</ion-label>  
+                      <ion-input type="tel" formControlName="telephone"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.telephone}}</small>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-item [class.error]="formErrors?.adresseMaroc">
+                        <ion-label position="floating">Adresse Maroc</ion-label>
+                        <ion-input type="text" formControlName="adresseMaroc"></ion-input>
+                      </ion-item>
+                      <small>{{formErrors?.adresseMaroc}}</small>
+                </ion-col>
+                <ion-col>
+                    <ion-item [class.error]="formErrors?.adresseEtranger">
+                        <ion-label position="floating">Adresse Etranger</ion-label>  
+                        <ion-input type="text" formControlName="adresseEtranger"></ion-input>
+                      </ion-item>
+                      <small>{{formErrors?.adresseEtranger}}</small>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+          <ion-grid no-padding>
+              <ion-item-divider no-padding>
+                  <ion-label>
+                    Informations conducteur
+                  </ion-label>
+                </ion-item-divider>
+
+                <ion-row>
+                    <ion-col>
+                        <ion-item [class.error]="formErrors?.CIN">
+                          <ion-label  position="floating">N° CIN</ion-label>
+                          <ion-input type="text" formControlName="CIN"></ion-input>
+                        </ion-item>
+                        <small>{{formErrors?.CIN}}</small>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item [class.error]="formErrors?.dateLivraisonCIN">
+                        <ion-label position="floating">Délivrance CIN<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>  
+                        <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateLivraisonCIN"></ion-datetime>
+                      </ion-item>
+                      <small>{{formErrors?.dateLivraisonCIN}}</small>
+                    </ion-col>
+                  </ion-row>
+
+
+            <ion-row>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.numeroPermis">
+                    <ion-label  position="floating">N° pérmis</ion-label>
+                    <ion-input type="text" formControlName="numeroPermis"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.numeroPermis}}</small>
+              </ion-col>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.dateLivraisonPermis">
+                  <ion-label position="floating">Délivrance pérmis<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>  
+                  <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateLivraisonPermis"></ion-datetime>
+                </ion-item>
+                <small>{{formErrors?.dateLivraisonPermis}}</small>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item [class.error]="formErrors?.numeroPassport">
+                      <ion-label  position="floating">N° passport</ion-label>
+                      <ion-input type="text" formControlName="numeroPassport"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.numeroPassport}}</small>
+                </ion-col>
+                <ion-col>
+                    <ion-item [class.error]="formErrors?.dateLivraisonPassport">
+                    <ion-label position="floating">Délivrance passport<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>  
+                    <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateLivraisonPassport"></ion-datetime>
+                  </ion-item>
+                  <small>{{formErrors?.dateLivraisonPassport}}</small>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                      <ion-item [class.error]="formErrors?.numeroEntree">
+                        <ion-label  position="floating">Numéro d'entrée</ion-label>
+                        <ion-input type="text" formControlName="numeroEntree"></ion-input>
+                      </ion-item>
+                      <small>{{formErrors?.numeroEntree}}</small>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label position="floating">Entrée Maroc<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>  
+                      <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateEntreeMaroc"></ion-datetime>
+                    </ion-item>
+                  </ion-col>
+                 
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item [class.error]="formErrors?.etat">
+                        <ion-label position="floating">Etat</ion-label>
+                        <ion-select  okText="Ok" cancelText="Annuler" formControlName="etat">
+                          <ion-select-option value="Normal">Normal</ion-select-option>
+                          <ion-select-option value="Bon client">Bon client</ion-select-option>
+                          <ion-select-option value="Très bon client">Très bon client</ion-select-option>
+                          <ion-select-option value="Excellent client">Excellent client</ion-select-option>
+                          <ion-select-option value="Black listé">Black listé</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                      <small>{{formErrors?.etat}}</small>
+                    </ion-col>
+                    
+                  </ion-row>
+                </ion-grid>
+                  <ion-item-divider no-padding>
+                      <ion-label>
+                        Documents
+                      </ion-label>
+                    </ion-item-divider>
+
+                        <ion-list #listPhotoClient>
+                            <ion-button (click)="chooseAction('photoPassport')" color="light" expand="full" margin>Photo de passport <ion-icon slot="end" name="image"></ion-icon></ion-button>
+                            <ion-item-sliding *ngIf="formCreateClient.get('photoPassport').value != ''">
+                              <ion-item>
+                                <ion-img src="{{formCreateClient.get('photoPassport').value}}" ></ion-img>
+                              </ion-item>
+                              <ion-item-options side="end">
+                                  <ion-item-option (click)="deletePhoto('photoPassport')" color="danger"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
+                                </ion-item-options>
+                            </ion-item-sliding>
+
+                            <ion-button (click)="chooseAction('photoIdentite')" color="light" expand="full" margin>Photo de CIN <ion-icon slot="end" name="image"></ion-icon></ion-button>
+                            <ion-item-sliding *ngIf="formCreateClient.get('photoIdentite').value != ''">
+                              <ion-item >
+                                  <ion-img src="{{formCreateClient.get('photoIdentite').value}}" ></ion-img>
+                              </ion-item>
+                              <ion-item-options side="end">
+                                  <ion-item-option (click)="deletePhoto('photoIdentite')" color="danger"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
+                                </ion-item-options>
+                            </ion-item-sliding>
+
+                            <ion-button (click)="chooseAction('photopermis')" color="light" expand="full" margin>Photo de pérmis <ion-icon slot="end" name="image"></ion-icon></ion-button>
+                            <ion-item-sliding *ngIf="formCreateClient.get('photopermis').value != ''" >
+                              <ion-item >
+                                  <ion-img src="{{formCreateClient.get('photopermis').value}}" ></ion-img>
+                              </ion-item>
+                              <ion-item-options side="end">
+                                  <ion-item-option (click)="deletePhoto('photopermis')" color="danger"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
+                                </ion-item-options>
+                            </ion-item-sliding>
+                        </ion-list>
+                          
+                            
+                                
+                              
+
+            
+            <ion-button type="submit" expand="full">Valider<ion-icon slot="end" name="save"></ion-icon></ion-button>
+          </form>
+</ion-content>

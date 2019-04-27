@@ -1,0 +1,29 @@
+.disponibilites {
+    .isReserved{
+        background: #68c754; color:#FFF;
+    }
+    .isReserved2{
+        background: #ff4e4e; color:#FFF;
+    }
+    ion-icon, ion-label{
+        color: #FFF;
+    }
+    ion-item{
+        --background: #2f314c;
+    }
+    ion-card-header{
+        border-bottom: 1px solid #CCC; margin-bottom:0; background: #2f314c;
+    }
+    ion-card-content{
+        padding-top: 0;
+    }
+    ion-col{
+        font-size: 14pt;
+    }
+    ion-item-options{
+        --ion-color-primary:#036;
+    }
+    ion-col.bold{
+        font-weight: bold; background: #2c3b41; color:#FFF;
+    }
+}

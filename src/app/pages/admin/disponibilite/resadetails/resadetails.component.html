@@ -1,0 +1,41 @@
+
+    <ion-list class="minify">
+<ion-item *ngFor=" let r of reservations">
+<ion-grid>  
+  
+  <ion-row>
+    <ion-col size="2"><ion-icon size="small" name="person"></ion-icon></ion-col>
+    <ion-col size="10"><small>{{ r.client.nom }} {{ r.client.prenom }}</small></ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col size="2"><ion-icon size="small" name="call"></ion-icon></ion-col>
+      <ion-col size="10"><small>{{ r.client.telephone }}</small></ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size="2"><ion-icon size="small" name="mail"></ion-icon></ion-col>
+        <ion-col size="10"><small>{{ r.client.email }}</small></ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size="1"><ion-icon size="small" name="time"></ion-icon></ion-col>
+          <ion-col size="1"><ion-icon size="small" name="arrow-round-forward"></ion-icon></ion-col>
+          <ion-col size="8"><small>{{ r.dateDu | date: 'dd/MM/yyyy HH:mm' }}</small></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="1"><ion-icon size="small" name="time"></ion-icon></ion-col>
+            <ion-col size="1"><ion-icon size="small" name="arrow-round-back"></ion-icon></ion-col>
+            <ion-col size="10"><small>{{ r.dateAu | date: 'dd/MM/yyyy HH:mm' }}</small></ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col size="1"><ion-icon size="small" name="pin"></ion-icon></ion-col>
+              <ion-col size="1"><ion-icon size="small" name="arrow-round-forward"></ion-icon></ion-col>
+              <ion-col size="10"><small>{{ r.lieuLivraison }}</small></ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="1"><ion-icon size="small" name="pin"></ion-icon></ion-col>
+                <ion-col size="1"><ion-icon size="small" name="arrow-round-back"></ion-icon></ion-col>
+                <ion-col size="10"><small>{{ r.lieuRecuperation }}</small></ion-col>
+              </ion-row>
+
+</ion-grid>
+</ion-item>
+  </ion-list>

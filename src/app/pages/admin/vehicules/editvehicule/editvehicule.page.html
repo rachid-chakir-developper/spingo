@@ -1,0 +1,232 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [text]="''"></ion-back-button>
+          </ion-buttons>
+        <ion-title>
+          {{title}}
+        </ion-title>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content class="editVehicule">
+<form [formGroup]="formEditVehicule" (ngSubmit)="updateVehicule(formEditVehicule)" *ngIf="vehiculeDetails">
+    <ion-grid no-padding>
+        <ion-item-divider no-padding>
+            <ion-label>
+              Informations sur le véhicule
+            </ion-label>
+          </ion-item-divider>
+      <ion-row>
+        <ion-col>
+            <ion-item [class.error]="formErrors?.dateMiseEnCirculation" [disabled]='disableItem'>
+              <ion-label  position="floating">Mise en circulation<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>
+              <ion-datetime display-format="YYYY-MM-DD" picker-format="DD MMM YYYY" formControlName="dateMiseEnCirculation"></ion-datetime>
+            </ion-item>
+            <small>{{formErrors?.dateMiseEnCirculation}}</small>
+        </ion-col>
+        <ion-col>
+            <ion-item [class.error]="formErrors?.designation" [disabled]='disableItem'>
+                <ion-label position="floating">Designation</ion-label>
+                <ion-input type="text" formControlName="designation"></ion-input>
+              </ion-item>
+              <small>{{formErrors?.designation}}</small>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.numeroWW" [disabled]='disableItem'>
+                  <ion-label position="floating">Numéro WW</ion-label>
+                  <ion-input type="text" formControlName="numeroWW"></ion-input>
+                </ion-item>
+                <small>{{formErrors?.numeroWW}}</small>
+          </ion-col>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.matricule" [disabled]='disableItem'>
+                  <ion-label position="floating">Matricule</ion-label>
+                  <ion-input type="text" formControlName="matricule"></ion-input>
+                </ion-item>
+                <small>{{formErrors?.matricule}}</small>
+          </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.marque" [disabled]='disableItem'>
+                  <ion-label position="floating">Marque</ion-label>
+                  <ion-input type="text" formControlName="marque"></ion-input>
+                </ion-item>
+                <small>{{formErrors?.marque}}</small>
+          </ion-col>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.model" [disabled]='disableItem'>
+                  <ion-label position="floating">Modèle</ion-label>
+                  <ion-input type="text" formControlName="model"></ion-input>
+                </ion-item>
+                <small>{{formErrors?.model}}</small>
+          </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.puissancefiscale" [disabled]='disableItem'>
+                  <ion-label position="floating">Puissance</ion-label>
+                  <ion-input type="number" formControlName="puissancefiscale"></ion-input>
+                </ion-item>
+                <small>{{formErrors?.puissancefiscale}}</small>
+          </ion-col>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.energie" [disabled]='disableItem'>
+                  <ion-label position="floating">Energie</ion-label>
+
+                  <ion-select  okText="Ok" cancelText="Annuler" formControlName="energie">
+                      <ion-select-option value="Diesel">Diesel</ion-select-option>
+                      <ion-select-option value="Essence">Essence</ion-select-option>
+                      <ion-select-option value="Hybride">Hybride</ion-select-option>
+                      <ion-select-option value="Electrique">Electrique</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <small>{{formErrors?.energie}}</small>
+          </ion-col>
+      </ion-row>
+
+      <ion-row>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.categorie" [disabled]='disableItem'>
+                  <ion-label position="floating">Catégorie</ion-label>
+                  <ion-select  okText="Ok" cancelText="Annuler" formControlName="categorie">
+                      <ion-select-option value="1">Catégorie 1</ion-select-option>
+                      <ion-select-option value="2">Catégorie 2</ion-select-option>
+                      <ion-select-option value="3">Catégorie 3</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <small>{{formErrors?.categorie}}</small>
+          </ion-col>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.actif" [disabled]='disableItem'>
+                  <ion-label position="floating">Active</ion-label>
+                  <ion-checkbox formControlName="actif"  slot="end"></ion-checkbox>
+                </ion-item>
+                <small>{{formErrors?.actif}}</small>
+          </ion-col>
+      </ion-row>
+
+      <ion-item-divider no-padding>
+          <ion-label>
+            Informations sur les équipements
+          </ion-label>
+        </ion-item-divider>
+        <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.nombrePlace" [disabled]='disableItem'>
+                    <ion-label position="floating">Nombre de place</ion-label>
+                    <ion-input type="number" formControlName="nombrePlace"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.nombrePlace}}</small>
+            </ion-col>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.nombrePorte" [disabled]='disableItem'>
+                    <ion-label position="floating">Nombre portes</ion-label>
+                    <ion-input type="number" formControlName="nombrePorte"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.nombrePorte}}</small>
+            </ion-col>
+        </ion-row>
+
+
+
+        <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.nombreBagage" [disabled]='disableItem'>
+                    <ion-label position="floating">Nombre bagages</ion-label>
+                    <ion-input type="number" formControlName="nombreBagage"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.nombreBagage}}</small>
+            </ion-col>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.transmission" [disabled]='disableItem'>
+                    <ion-label position="floating">Transmission</ion-label>
+                    <ion-select  okText="Ok" cancelText="Annuler" formControlName="transmission">
+                        <ion-select-option value="Automatique">Automatique</ion-select-option>
+                        <ion-select-option value="Manuelle">Manuelle</ion-select-option>
+                      </ion-select>
+                  </ion-item>
+                  <small>{{formErrors?.transmission}}</small>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.climatisation" [disabled]='disableItem'>
+                    <ion-label position="floating">Climatisation</ion-label>
+                    <ion-checkbox formControlName="climatisation"  slot="end"></ion-checkbox>
+                  </ion-item>
+                  <small>{{formErrors?.climatisation}}</small>
+            </ion-col>
+        </ion-row>
+
+        <ion-item-divider no-padding>
+            <ion-label>
+              Informations sur l'achat
+            </ion-label>
+          </ion-item-divider>
+
+
+          <ion-row>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.prixAchat" [disabled]='disableItem'>
+                      <ion-label position="floating">Prix acaht</ion-label>
+                      <ion-input type="text" formControlName="prixAchat"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.prixAchat}}</small>
+              </ion-col>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.avance" [disabled]='disableItem'>
+                      <ion-label position="floating">Avance</ion-label>
+                      <ion-input type="text" formControlName="avance"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.avance}}</small>
+              </ion-col>
+          </ion-row>
+
+          <ion-row>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.montantMensualite" [disabled]='disableItem'>
+                      <ion-label position="floating">Montant mensualité</ion-label>
+                      <ion-input type="text" formControlName="montantMensualite"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.montantMensualite}}</small>
+              </ion-col>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.mensualiteRestante" [disabled]='disableItem'>
+                      <ion-label position="floating">Mensualités réstantes</ion-label>
+                      <ion-input type="text" formControlName="mensualiteRestante"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.mensualiteRestante}}</small>
+              </ion-col>
+          </ion-row>
+
+          <ion-row>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.dateDebutMensualite" [disabled]='disableItem'>
+                    <ion-label  position="floating">Début mensualité<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>
+                    <ion-datetime display-format="YYYY-MM-DD" picker-format="DD MMM YYYY" formControlName="dateDebutMensualite"></ion-datetime>
+                  </ion-item>
+                  <small>{{formErrors?.dateDebutMensualite}}</small>
+              </ion-col>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.dateFinMensualite" [disabled]='disableItem'>
+                    <ion-label  position="floating">Fin mensualité<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>
+                    <ion-datetime display-format="YYYY-MM-DD" picker-format="DD MMM YYYY" formControlName="dateFinMensualite"></ion-datetime>
+                  </ion-item>
+                  <small>{{formErrors?.dateFinMensualite}}</small>
+              </ion-col>
+          </ion-row>
+
+      </ion-grid>
+    
+    <ion-button type="submit" expand="full" *ngIf='!disableItem'>Enregistrer <ion-icon slot="end" name="save"></ion-icon></ion-button>
+</form>
+
+</ion-content>

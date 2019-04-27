@@ -1,0 +1,23 @@
+.dashboard{
+    .resa ion-item{
+        padding-right:16px;
+    }
+    .resa ion-item:last-child{
+        --inner-border-width: 0; 
+    }
+    .resa h1{
+        font-size: 16px; color: #FFF;
+    }
+    .resa ion-list-header, .resa ion-card-header{
+        background: #2c3b41;
+    }
+    .resa h2{
+        font-size: 15px;
+    }
+    .resa h4{
+        font-size: 15px; font-weight: bold;
+    }
+    .resa h5{
+        color:#43ab33
+    }
+}

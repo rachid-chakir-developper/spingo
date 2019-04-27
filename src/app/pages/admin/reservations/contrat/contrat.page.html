@@ -1,0 +1,241 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>contrat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding padding-bottom class="contrat">
+  <form [formGroup]="contratForm" (ngSubmit)="onEditContrat(contratForm)">
+    <ion-card>
+      <ion-card-header color="medium">
+        <ion-card-subtitle>Contrat</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content no-padding padding-bottom padding-end>
+          <ion-item >
+            <ion-label position="floating">Date création du contrat</ion-label>
+            <ion-datetime display-format="DD-MM-YYYY HH:mm" formControlName="date"></ion-datetime>
+          </ion-item>
+      </ion-card-content>
+    </ion-card>
+    <ion-card padding-bottom>
+      <ion-card-header color="medium">
+        <ion-card-subtitle>Deuxième conducteur</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content no-padding>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Prenom</ion-label>
+                  <ion-input type="text" formControlName="prenom2"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Nom</ion-label>
+                  <ion-input type="text" formControlName="nom2"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item >
+                  <ion-label position="floating">Né le</ion-label>
+                  <ion-datetime display-format="MM/DD/YYYY" formControlName="datenaissance2"></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">à</ion-label>
+                  <ion-input type="text" formControlName="lieunaissance2"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Nationalité</ion-label>
+                  <ion-input type="text" formControlName="nationalite2"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">N° permis</ion-label>
+                  <ion-input type="text" formControlName="numeropermis2"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item >
+                  <ion-label position="floating">Date emission permis</ion-label>
+                  <ion-datetime  display-format="MM/DD/YYYY" formControlName="datepermis2"></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Adresse à l'étrangé</ion-label>
+                  <ion-input type="text" formControlName="adresseetranger2"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">CIN</ion-label>
+                  <ion-input type="text" formControlName="cin2"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item >
+                  <ion-label position="floating">Date CIN</ion-label>
+                  <ion-datetime display-format="DD/MM/YYYY" formControlName="datecin2"></ion-datetime>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">N° passport</ion-label>
+                  <ion-input type="text" formControlName="numpassport2"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item >
+                  <ion-label position="floating">Date passport</ion-label>
+                  <ion-datetime display-format="DD/MM/YYYY" formControlName="datepassport2"></ion-datetime>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Téléphone</ion-label>
+                  <ion-input type="number" formControlName="telphone2"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header color="medium">
+        <ion-card-subtitle>Etat véhicule initial</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content no-padding padding-bottom padding-end>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">Carburant départ</ion-label>
+                
+                <ion-range min="0" max="100" step="25" snaps="true" color="primary"  
+                formControlName="carburant"  no-padding>
+                  <ion-icon size="small" slot="start" name="thermometer"></ion-icon>
+                  <ion-icon slot="end" name="thermometer"></ion-icon>
+                </ion-range>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Kilométrage départ</ion-label>
+                <ion-input type="text" formControlName="kilometragedebut"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button (click)="chooseAction('photos')" color="light" expand="full" margin>
+                photo de l'etat du vehicule
+                <ion-icon slot="end" name="image"></ion-icon>
+              </ion-button>
+              <ion-item-sliding *ngFor="let photo of photosPicker ; let id = index">
+                <ion-item >
+                    <ion-img src="{{ photo }}" ></ion-img>
+                </ion-item>
+                <ion-item-options side="end">
+                  <ion-item-option (click)="presentAlertConfirmPicker('photos', photo)" color="danger">
+                    <ion-icon name="trash" size="large"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+              <ion-item-sliding *ngFor="let photo of photos ; let id = index">
+                <ion-item >
+                    <ion-img src="{{ 'data:image/jpeg;base64,' + photo }}" ></ion-img>
+                </ion-item>
+                <ion-item-options side="end">
+                  <ion-item-option (click)="presentAlertConfirm('photos', id)" color="danger">
+                    <ion-icon name="trash" size="large"></ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+        <ion-card-header color="medium">
+          <ion-card-subtitle>Etat véhicule récupération</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content no-padding padding-bottom padding-end>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="stacked">Carburant retour</ion-label>
+                  
+                  <ion-range min="0" max="100" step="25" snaps="true" color="primary" 
+                  formControlName="carburantretour"  no-padding>
+                    <ion-icon size="small" slot="start" name="thermometer"></ion-icon>
+                    <ion-icon slot="end" name="thermometer"></ion-icon>
+                  </ion-range>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Kilométrage retour</ion-label>
+                  <ion-input type="text" formControlName="kilometragefin"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-button (click)="chooseAction('etatrecuperation')" color="light" expand="full" margin>
+                  photo de l'etat du vehicule
+                  <ion-icon slot="end" name="image"></ion-icon>
+                </ion-button>
+                <ion-item-sliding *ngFor="let photo of etatrecuperationPicker ; let id = index">
+                  <ion-item >
+                      <ion-img src="{{ photo }}" ></ion-img>
+                  </ion-item>
+                  <ion-item-options side="end">
+                    <ion-item-option (click)="presentAlertConfirmPicker('etatrecuperation', photo)" color="danger">
+                      <ion-icon name="trash" size="large"></ion-icon>
+                    </ion-item-option>
+                  </ion-item-options>
+                </ion-item-sliding>
+                <ion-item-sliding *ngFor="let photo of etatrecuperation ; let id = index">
+                  <ion-item >
+                      <ion-img src="{{ 'data:image/jpeg;base64,' + photo }}" ></ion-img>
+                  </ion-item>
+                  <ion-item-options side="end">
+                    <ion-item-option (click)="presentAlertConfirm('etatrecuperation', id)" color="danger">
+                      <ion-icon name="trash" size="large"></ion-icon>
+                    </ion-item-option>
+                  </ion-item-options>
+                </ion-item-sliding>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+      <ion-button type="submit" color="primary" expand="full">Mettre à jour<ion-icon slot="end" name="save"></ion-icon></ion-button>
+
+</form>
+</ion-content>

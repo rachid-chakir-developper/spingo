@@ -1,0 +1,237 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [text]="''"></ion-back-button>
+          </ion-buttons>
+        <ion-title>
+          {{title}}
+        </ion-title>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content class="editResa">
+<form [formGroup]="formEditResa" (ngSubmit)="updateResa(formEditResa)" *ngIf="reservationDetails">
+    
+    <ion-grid no-padding>
+        <ion-item-divider no-padding>
+            <ion-label>
+              Informations sur la réservation
+            </ion-label>
+          </ion-item-divider>
+      <ion-row>
+        <ion-col>
+            <ion-item [class.error]="formErrors?.dateDu" [disabled]='disableItem'>
+              <ion-label  position="floating">Date début<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>
+              <ion-datetime display-format="YYYY-MM-DD HH:mm" picker-format="DD MMM YYYY / HH:mm" formControlName="dateDu"></ion-datetime>
+            </ion-item>
+            <small>{{formErrors?.dateDu}}</small>
+        </ion-col>
+        <ion-col>
+          <ion-item [class.error]="formErrors?.dateAu" [disabled]='disableItem'>
+            <ion-label position="floating">Date fin<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>  
+            <ion-datetime display-format="YYYY-MM-DD HH:mm" picker-format="DD MMM YYYY / HH:mm" formControlName="dateAu"></ion-datetime>
+          </ion-item>
+          <small>{{formErrors?.dateAu}}</small>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+            <ion-item [disabled]='disableItem'>
+                <ion-label position="floating">Lieu de livraison</ion-label>
+                <ion-select  okText="Ok" cancelText="Annuler" formControlName="lieuLivraison">
+                  <ion-select-option value="Agence">Agence</ion-select-option>
+                  <ion-select-option value="Centre ville">Centre ville</ion-select-option>
+                  <ion-select-option value="Hotel">Hôtel</ion-select-option>
+                  <ion-select-option value="Aeroport">Aeroport</ion-select-option>
+                  <ion-select-option value="Autre">Autre</ion-select-option>
+                </ion-select>
+              </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-item [disabled]='disableItem'>
+                <ion-label position="floating">Lieu de récupération</ion-label>
+                <ion-select okText="Ok" cancelText="Annuler" formControlName="lieuRecuperation">
+                    <ion-select-option value="Agence">Agence</ion-select-option>
+                  <ion-select-option value="Centre ville">Centre ville</ion-select-option>
+                  <ion-select-option value="Hotel">Hôtel</ion-select-option>
+                  <ion-select-option value="Aeroport">Aeroport</ion-select-option>
+                  <ion-select-option value="Autre">Autre</ion-select-option>
+                </ion-select>
+              </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item-divider no-padding>
+          <ion-label>
+            Informations sur le client
+          </ion-label>
+        </ion-item-divider>
+      <ion-row>
+          <ion-col>
+              <ion-item (click)="showPopupChooseClient()" tappable [disabled]='disableItem'>
+                  <ion-label position="floating">Client<ion-icon name="list" slot="end" size="small" *ngIf='!disableItem'></ion-icon></ion-label>
+                  <ion-input type="hidden" formControlName="client"></ion-input>
+                  <ion-text>{{ clientName }}</ion-text>
+                </ion-item>
+                <small>{{formErrors?.client}}</small>
+          </ion-col>
+          <ion-col [hidden]='disableItem'>
+              <ion-item>
+                  <ion-label position="stacked">Nouveau client ?</ion-label>
+                  <ion-button class="w100" expand="block" (click)="showPopupClientAdd()"><ion-icon slot="start" name="add"></ion-icon> Ajouter client</ion-button>
+                </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-item-divider no-padding>
+            <ion-label>
+              Informations sur le véhicule
+            </ion-label>
+          </ion-item-divider>
+        <ion-row>
+            <ion-col>
+                  <ion-item (click)="presentModalVehiculeList()" [disabled]='disableItem'>
+                      <ion-label position="floating">Véhicule<ion-icon name="list" slot="end" size="small" *ngIf='!disableItem'></ion-icon></ion-label>
+                      <ion-input type="hidden" formControlName="vehicule"></ion-input>
+                      <ion-text>{{ vehiculeName }}</ion-text>
+                    </ion-item>
+                    <small>{{formErrors?.vehicule}}</small>
+            </ion-col>
+        </ion-row>
+
+        <ion-row [hidden]="formEditResa.get('vehicule').value != -1">
+            <ion-col>
+                <ion-item (click)="presentModalPartenaireList()" [class.error]="formErrors?.partenaire" [disabled]='disableItem'>
+                    <ion-label position="floating">Partenaire<ion-icon name="list" slot="end" size="small" *ngIf='!disableItem'></ion-icon></ion-label>
+                    <ion-input type="hidden" formControlName="partenaire"></ion-input>
+                    <ion-text>{{ partenaireName }}</ion-text>
+                  </ion-item>
+                  <small>{{ formErrors?.partenaire }}</small>
+          </ion-col>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.prixSousLocation" [disabled]='disableItem'>
+                    <ion-label position="floating">Prix sous location</ion-label>
+                    <ion-input type="number" formControlName="prixSousLocation"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.prixSousLocation}}</small>
+            </ion-col>
+        </ion-row>
+        <ion-item-divider no-padding>
+            <ion-label>
+              Informations sur le paiement de la réservation
+            </ion-label>
+          </ion-item-divider>
+        <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.totalReglement" [disabled]='disableItem'>
+                    <ion-label position="floating">Prix total</ion-label>
+                    <ion-input type="number" formControlName="totalReglement"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.totalReglement}}</small>
+            </ion-col>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.miseEnPlace" [disabled]='disableItem'>
+                    <ion-label position="floating">Avance</ion-label>
+                    <ion-input type="number" formControlName="miseEnPlace"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.miseEnPlace}}</small>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+
+            <ion-col>
+                <ion-item [disabled]='disableItem'>
+                    <ion-label position="floating">Reste</ion-label>
+                    <ion-input type="number" formControlName="reste"></ion-input>
+                  </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.modeReglement" [disabled]='disableItem'>
+                    <ion-label position="floating">Mode de réglement</ion-label>
+                    <ion-select okText="Ok" cancelText="Annuler" formControlName="modeReglement">
+                      <ion-select-option value="Espece">Espèce</ion-select-option>
+                      <ion-select-option value="Carte bancaire">Carte bancaire</ion-select-option>
+                      <ion-select-option value="Cheque">Chèque</ion-select-option>
+                      <ion-select-option value="TPE">TPE</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <small>{{formErrors?.modeReglement}}</small>
+            </ion-col>
+        </ion-row>
+
+        <ion-row [hidden]="formEditResa.get('modeReglement').value != 'Carte bancaire'">
+            <ion-col>
+                <ion-item [disabled]='disableItem'>
+                    <ion-label position="floating">Type de carte</ion-label>
+                    <ion-input formControlName="typeCarte" type="text" ></ion-input>
+                  </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item [disabled]='disableItem'>
+                    <ion-label position="floating">Titulaire de carte</ion-label>
+                    <ion-input type="text" formControlName="titulaireCarte" ></ion-input>
+                  </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row [hidden]="formEditResa.get('modeReglement').value != 'Carte bancaire'">
+            <ion-col>
+                <ion-item [class.error]="formErrors?.dateExpiration" [disabled]='disableItem'>
+                    <ion-label position="floating">Date d'expiration</ion-label>
+                    <ion-datetime display-format="MM/YYYY" picker-format="MMM YYYY" formControlName="dateExpiration"></ion-datetime>
+                  </ion-item>
+                  <small>{{formErrors?.dateExpiration}}</small>
+            </ion-col>
+            <ion-col>
+                <ion-item [disabled]='disableItem'>
+                    <ion-label position="floating">Cryptogramme</ion-label>
+                    <ion-input type="text" formControlName="cryptogramme" ></ion-input>
+                  </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-item-divider no-padding>
+            <ion-label>
+              Remarques et observations
+            </ion-label>
+          </ion-item-divider>
+        <ion-row>
+            <ion-col>
+                <ion-item [disabled]='disableItem'>
+                    <ion-label position="floating">Observation</ion-label>
+                    <ion-textarea formControlName="observation"></ion-textarea>
+                  </ion-item>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-list no-padding>
+        <ion-list-header no-padding><ion-label>Etat</ion-label></ion-list-header>
+                <ion-radio-group   no-padding formControlName="etat">
+                  <ion-grid>
+                    <ion-row no-padding>
+                      <ion-col no-padding>
+                        <ion-item lines="none" [disabled]='disableItem'>
+                          <ion-label>En cours</ion-label>
+                          <ion-radio slot="start" value="En cours" mode="ios"></ion-radio> 
+                        </ion-item>
+                      </ion-col>
+                      <ion-col no-padding><ion-item lines="none" [disabled]='disableItem'>
+                          <ion-label>Confirmée</ion-label><ion-radio slot="start" value="Confirmée" mode="ios"></ion-radio> 
+                        </ion-item></ion-col>
+                      <ion-col no-padding><ion-item lines="none" [disabled]='disableItem'>
+                          <ion-label>Annulée</ion-label> <ion-radio slot="start" value="Annulée" mode="ios"></ion-radio> 
+                        </ion-item></ion-col>
+                    </ion-row>
+                  </ion-grid>
+                            
+                        
+                            
+                      
+                            
+                       
+                </ion-radio-group>
+              </ion-list>
+    
+    <ion-button type="submit" expand="full" *ngIf='!disableItem'>Enregistrer <ion-icon slot="end" name="save"></ion-icon></ion-button>
+</form>
+
+</ion-content>

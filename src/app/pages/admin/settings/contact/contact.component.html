@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="end">
+          <ion-button (click)="closeModal()"><ion-icon name="close" size="large"></ion-icon></ion-button>
+        </ion-buttons>
+      <ion-title>
+          Nous contacter
+      </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="popupContact">
+    <form [formGroup]="formContact" (ngSubmit)="contact()">
+    
+        <ion-grid no-padding>
+            <ion-item-divider no-padding>
+                <ion-label>
+                  Formulaire de contact
+                </ion-label>
+              </ion-item-divider>
+          
+          <ion-row>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.telephone">
+                      <ion-label position="floating">Téléphone</ion-label>  
+                      <ion-input type="tel" formControlName="telephone"></ion-input>
+                    </ion-item>
+              </ion-col>
+            </ion-row>
+
+              
+              
+                <ion-row>
+                    <ion-col>
+                        <ion-item [class.error]="formErrors?.sujet">
+                        <ion-label position="floating">Sujet</ion-label>
+                        <ion-select  okText="Ok" cancelText="Annuler" formControlName="sujet">
+                          <ion-select-option value="Bug">Bug</ion-select-option>
+                          <ion-select-option value="Nouvelle foncionnalité">Nouvelle foncionnalité</ion-select-option>
+                          <ion-select-option value="Service commercial">Service commercial</ion-select-option>
+                          <ion-select-option value="Autre">Autre</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+                    
+                  </ion-row>
+
+                  <ion-row>
+                      <ion-col>
+                          <ion-item [class.error]="formErrors?.message">
+                                  <ion-textarea rows="8" placeholder="Votre message ici..." formControlName="message" text-left></ion-textarea>
+                        </ion-item>
+                      </ion-col>
+                      
+                    </ion-row>
+
+                </ion-grid>
+   
+            <ion-button type="submit" expand="full">Envoyer<ion-icon slot="end" name="send"></ion-icon></ion-button>
+          </form>
+</ion-content>

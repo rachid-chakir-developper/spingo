@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Sélectionner</ion-button>
+          </ion-buttons>
+        <ion-title>
+            Liste véhicules
+        </ion-title>
+      </ion-toolbar>
+      <ion-searchbar color="light" placeholder="Recherche" (ionChange)="filterResa()" [(ngModel)]="queryText"></ion-searchbar>
+</ion-header>
+
+<ion-content class="popuplistvehicule">
+  
+    <ion-list *ngIf="vehicules">
+      <ion-radio-group [(ngModel)]="radioVehicule">
+          <ion-item (click)="setValue('Sous location')" *ngIf="page === 'resa'">
+              <ion-avatar slot="start">
+                <ion-icon name="swap" size="large"></ion-icon>
+              </ion-avatar>
+              <ion-label>Sous location
+                          <p>
+                              Il faudra choisir un partenaie après.
+                          </p>
+              </ion-label>
+            <ion-radio slot="end" value="-1" *ngIf="-1 != id && -2 != id"></ion-radio>
+            <ion-radio slot="end" value="-1" *ngIf="-1 == id" cheked></ion-radio>
+            </ion-item>
+            <ion-item (click)="setValue('Agence')" *ngIf="page === 'charge'">
+                <ion-avatar slot="start">
+                  <ion-icon name="swap" size="large"></ion-icon>
+                </ion-avatar>
+                <ion-label>Agence</ion-label>
+              <ion-radio slot="end" value="-2" *ngIf="-1 != id && -2 != id"></ion-radio>
+              <ion-radio slot="end" value="-2" *ngIf="-2 == id" cheked></ion-radio>
+              </ion-item>
+
+        <ion-item *ngFor="let v of vehicules" (click)="setValue(v)">
+            <ion-avatar slot="start">
+              <ion-icon name="car" size="large"></ion-icon>
+            </ion-avatar>
+            <ion-label>{{ v.designation }} ( {{ v.matricule }} )
+                        <p>
+                            {{ v.marque }}<br>
+                            {{ v.model }}<br>
+                            {{ v.dateMiseEnCirculation }}
+                        </p>
+            </ion-label>
+            <ion-radio slot="end" value="{{ v.id }}" *ngIf="v.id != id"></ion-radio>
+            <ion-radio slot="end" value="{{ v.id }}" *ngIf="v.id == id" cheked></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+</ion-content>

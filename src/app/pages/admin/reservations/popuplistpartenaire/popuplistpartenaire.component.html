@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Sélectionner</ion-button>
+          </ion-buttons>
+        <ion-title>
+            Liste partenaires
+        </ion-title>
+      </ion-toolbar>
+      <ion-searchbar color="light" placeholder="Recherche" (ionChange)="filterResa()" [(ngModel)]="queryText"></ion-searchbar>
+</ion-header>
+
+<ion-content class="popuplistpartenaire">
+  
+    <ion-list *ngIf="partenaires">
+      <ion-radio-group [(ngModel)]="radioClient">
+        <ion-item *ngFor="let p of partenaires" (click)="setValue(p)">
+            <ion-avatar slot="start">
+              <ion-icon name="contacts" size="large"></ion-icon>
+            </ion-avatar>
+            <ion-label>{{ p.nom }}
+                        <p>
+                            {{ p.telephone}}<br>
+                            {{ p.email}}
+                        </p>
+            </ion-label>
+            <ion-radio slot="end" value="{{ p.id }}" *ngIf="p.id != id"></ion-radio>
+            <ion-radio slot="end" value="{{ p.id }}" *ngIf="p.id == id" cheked></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+</ion-content>

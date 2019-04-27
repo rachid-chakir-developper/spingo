@@ -1,0 +1,72 @@
+<ion-header no-border>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">Passer</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content fullscreen class="tutorial" padding>
+    <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
+      <ion-slide>
+        <img src="assets/img/logo.png" class="slide-image" />
+        <h2 class="slide-title" style="margin-bottom:40px;">
+          Bienvenue sur
+          
+          <b>SPINGO !</b>
+        </h2>
+        <p>
+          <b>SpinGo Rent car</b> est votre application de gestion de votre location de voiture.</p>
+          <p> Rent Car, rassmeble ce qui se fait de mieux en gestion de parcs, réservations et de disponibilités.
+        
+        </p>
+      </ion-slide>
+      <ion-slide>
+        <img src="assets/img/resa.png" class="slide-image" />
+        <h2 class="slide-title">Gestion des réservations</h2>
+        <ul>
+          <li>Enregistrer les demandes de
+                réservations.</li>
+          <li>Tenir à jour un planning des
+                  réservations et locations
+                  consultables à tous moments</li>
+        </ul>
+      </ion-slide>
+      <ion-slide>
+        <img src="assets/img/dispo.png" class="slide-image" />
+        <h2 class="slide-title">Gestion des disponibilités</h2>
+        <p>
+          <ul>
+            <li>Gérez simplement et efficacement les disponibilités des
+                véhicules.</li>
+            <li>Ayez un aperçu simple et rapide de vos véhicules libres et réservés.</li>
+          </ul>
+        </ion-slide>
+        <ion-slide>
+          <img src="assets/img/recettes.png" class="slide-image" />
+          <h2 class="slide-title">Recettes / Dépenses</h2>
+          <p>
+            <ul>
+              <li>Ayez une vue globale
+                  sur votre chiffre d’affaire
+                  par mois ou par période.
+                  </li>
+              <li>Enregistrez les dépenses
+                  détaillées par véhicule.</li>
+              <li>
+                      Connaître et maîtriser
+                      les coûts du parc.
+                  </li>
+            </ul>
+          </ion-slide>
+          <ion-slide>
+            <img src="assets/img/parc.png" class="slide-image" />
+            <h2 class="slide-title">Prêt pour l'aventure ?</h2>
+            <ion-button fill="clear" (click)="startApp()">
+          Continuer
+          
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-slide>
+        </ion-slides>
+      </ion-content>
+  

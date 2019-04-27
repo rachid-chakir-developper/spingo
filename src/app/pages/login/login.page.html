@@ -1,0 +1,34 @@
+<ion-content padding class="loginPage">
+  <ion-img src="assets/img/logo.png" class="logo" ></ion-img>
+<form (ngSubmit)="logMeIn(signInForm)" #signInForm="ngForm">
+  <ion-text color="medium">
+    <p text-center>
+      Connectez vous ou créer un compte gratuitement !
+    </p>
+  </ion-text>
+  <ion-item no-padding>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input type="email" inputmode="email" [(ngModel)]= "signInForm.username" name="username" required></ion-input>
+  </ion-item>
+
+  <ion-item no-padding>
+    <ion-label position="floating">Mot de passe</ion-label>
+    <ion-input inputmode="password" type="password" [(ngModel)]= "signInForm.password" name="password" required></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" color="primary" no-margin margin-top  type="submit" [disabled]="!signInForm.valid">Connexion
+    <ion-icon slot="end" name="log-in"></ion-icon>
+  </ion-button>
+</form>
+
+<ion-grid no-padding margin-top>
+  <ion-row>
+    <ion-col no-padding>
+      <ion-button fill="clear" size="small" color="light" no-padding>Créer un compte</ion-button>
+    </ion-col>
+    <ion-col no-padding text-right>
+      <ion-button fill="clear" size="small" color="light" no-padding>Mot de passe oublié ?</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

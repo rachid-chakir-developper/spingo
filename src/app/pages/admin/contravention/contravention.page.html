@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        <ion-title>
+          Contravention
+        </ion-title>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content class="contravention">
+    <form [formGroup]="formContravention" (ngSubmit)="doSearch(formContravention)">
+  <ion-list>
+      <ion-item-divider no-padding>
+          <ion-label>
+            Informations sur la contravention
+          </ion-label>
+        </ion-item-divider>
+      <ion-item class="top">
+          <ion-label  position="floating">Date<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>
+          <ion-datetime display-format="YYYY-MM-DD HH:mm" picker-format="DD MMM YYYY / HH:mm" formControlName="date"></ion-datetime>
+        </ion-item>
+
+        <ion-item class="top" (click)="presentModalVehiculeList()" [disabled]='disableItem'>
+            <ion-label position="floating">Véhicule concerné<ion-icon name="list" slot="end" size="small"></ion-icon></ion-label>
+            <ion-input type="hidden" formControlName="vehicule"></ion-input>
+                      <ion-text>{{ vehiculeName }}</ion-text>
+          </ion-item>
+
+          <ion-button type="submit" expand="full">Chercher <ion-icon slot="end" name="search"></ion-icon></ion-button>
+  </ion-list>
+
+  <ion-list *ngIf="reservationDetails">
+      <ion-item-divider no-padding>
+          <ion-label>
+            1 Résultat trouvé !
+          </ion-label>
+        </ion-item-divider>
+
+
+
+        <ion-card class="resa"  *ngFor="let r of reservationDetails">
+            <ion-list no-padding>
+                <ion-list-header mode="ios">
+                  <ion-label><h1>{{r.client.prenom}} {{r.client.nom}}</h1></ion-label>
+                </ion-list-header>
+                <ion-item class="top" mode="ios" no-padding>
+                    <ion-label>
+                  <h4><b>Date du : </b>{{r.dateDu}}</h4>
+                  <h4><b>Date au : </b>{{r.dateAu}}</h4>                  
+                  </ion-label>
+                </ion-item>
+                <ion-grid><ion-row>
+                    <ion-col><ion-button expand="full" routerLink="/app/tabs/client/show/{{r.client.id}}">Fiche client <ion-icon slot="end" name="person"></ion-icon></ion-button></ion-col>
+                    <ion-col><ion-button expand="full" routerLink="/app/tabs/reservations/show/{{r.id}}">Détails réservation <ion-icon slot="end" name="create"></ion-icon></ion-button></ion-col>
+                  </ion-row></ion-grid>
+              </ion-list>
+        </ion-card>
+
+  </ion-list>
+
+  </form>
+</ion-content>

@@ -1,0 +1,227 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button [text]="''"></ion-back-button>
+        </ion-buttons>
+      <ion-title>
+        {{title}}
+      </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="editClient">
+  <form [formGroup]="formEditClient" (ngSubmit)="updateClient(formEditClient)" *ngIf="clientDetails">
+  
+      <ion-grid no-padding>
+          <ion-item-divider no-padding>
+              <ion-label>
+                Informations personnelles
+              </ion-label>
+            </ion-item-divider>
+        <ion-row>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.prenom" [disabled]='disableItem'>
+                <ion-label  position="floating">Prénom</ion-label>
+                <ion-input type="text" formControlName="prenom"></ion-input>
+              </ion-item>
+              <small>{{formErrors?.prenom}}</small>
+          </ion-col>
+          <ion-col>
+            <ion-item [class.error]="formErrors?.nom" [disabled]='disableItem'>
+              <ion-label position="floating">Nom</ion-label>  
+              <ion-input type="text" formControlName="nom"></ion-input>
+            </ion-item>
+            <small>{{formErrors?.nom}}</small>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.dateNaissance" [disabled]='disableItem'>
+                  <ion-label position="floating">Date naissance<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>
+                  <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateNaissance"></ion-datetime>
+                </ion-item>
+                <small>{{formErrors?.dateNaissance}}</small>
+          </ion-col>
+          <ion-col>
+              <ion-item [class.error]="formErrors?.nationalite" [disabled]='disableItem'>
+                  <ion-label position="floating">Nationnalité</ion-label>  
+                  <ion-input type="text" formControlName="nationalite"></ion-input>
+                </ion-item>
+                <small>{{formErrors?.nationalite}}</small>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.email" [disabled]='disableItem'>
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input type="email" formControlName="email"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.email}}</small>
+            </ion-col>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.telephone" [disabled]='disableItem'>
+                    <ion-label position="floating">Téléphone</ion-label>  
+                    <ion-input type="tel" formControlName="telephone"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.telephone}}</small>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.adresseMaroc" [disabled]='disableItem'>
+                      <ion-label position="floating">Adresse Maroc</ion-label>
+                      <ion-input type="text" formControlName="adresseMaroc"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.adresseMaroc}}</small>
+              </ion-col>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.adresseEtranger" [disabled]='disableItem'>
+                      <ion-label position="floating">Adresse Etranger</ion-label>  
+                      <ion-input type="text" formControlName="adresseEtranger"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.adresseEtranger}}</small>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid no-padding>
+            <ion-item-divider no-padding>
+                <ion-label>
+                  Informations conducteur
+                </ion-label>
+              </ion-item-divider>
+
+              <ion-row>
+                  <ion-col>
+                      <ion-item [class.error]="formErrors?.CIN" [disabled]='disableItem'>
+                        <ion-label  position="floating">N° CIN</ion-label>
+                        <ion-input type="text" formControlName="CIN"></ion-input>
+                      </ion-item>
+                      <small>{{formErrors?.CIN}}</small>
+                  </ion-col>
+                  <ion-col>
+                      <ion-item [class.error]="formErrors?.dateLivraisonCIN" [disabled]='disableItem'>
+                      <ion-label position="floating">Délivrance CIN<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>  
+                      <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateLivraisonCIN"></ion-datetime>
+                    </ion-item>
+                    <small>{{formErrors?.dateLivraisonCIN}}</small>
+                  </ion-col>
+                </ion-row>
+
+
+          <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.numeroPermis" [disabled]='disableItem'>
+                  <ion-label  position="floating">N° pérmis</ion-label>
+                  <ion-input type="text" formControlName="numeroPermis"></ion-input>
+                </ion-item>
+                <small>{{formErrors?.numeroPermis}}</small>
+            </ion-col>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.dateLivraisonPermis" [disabled]='disableItem'>
+                <ion-label position="floating">Délivrance pérmis<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>  
+                <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateLivraisonPermis"></ion-datetime>
+              </ion-item>
+              <small>{{formErrors?.dateLivraisonPermis}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.numeroPassport" [disabled]='disableItem'>
+                    <ion-label  position="floating">N° passport</ion-label>
+                    <ion-input type="text" formControlName="numeroPassport"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.numeroPassport}}</small>
+              </ion-col>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.dateLivraisonPassport" [disabled]='disableItem'>
+                  <ion-label position="floating">Délivrance passport<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>  
+                  <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateLivraisonPassport"></ion-datetime>
+                </ion-item>
+                <small>{{formErrors?.dateLivraisonPassport}}</small>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item [class.error]="formErrors?.numeroEntree" [disabled]='disableItem'>
+                      <ion-label  position="floating">Numéro d'entrée</ion-label>
+                      <ion-input type="text" formControlName="numeroEntree"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.numeroEntree}}</small>
+                </ion-col>
+                <ion-col>
+                  <ion-item [class.error]="formErrors?.dateEntreeMaroc" [disabled]='disableItem'>
+                    <ion-label position="floating">Entrée Maroc<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>  
+                    <ion-datetime display-format="MM/DD/YYYY" picker-format="DD MMM YYYY" formControlName="dateEntreeMaroc"></ion-datetime>
+                  </ion-item>
+                  <small>{{formErrors?.dateEntreeMaroc}}</small>
+                </ion-col>
+               
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                      <ion-item [class.error]="formErrors?.etat" [disabled]='disableItem'>
+                      <ion-label position="floating">Etat</ion-label>
+                      <ion-select  okText="Ok" cancelText="Annuler" formControlName="etat">
+                        <ion-select-option value="Normal">Normal</ion-select-option>
+                        <ion-select-option value="Bon client">Bon client</ion-select-option>
+                        <ion-select-option value="Très bon client">Très bon client</ion-select-option>
+                        <ion-select-option value="Excellent client">Excellent client</ion-select-option>
+                        <ion-select-option value="Black listé">Black listé</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <small>{{formErrors?.etat}}</small>
+                  </ion-col>
+                  
+                </ion-row>
+              </ion-grid>
+                <ion-item-divider no-padding *ngIf="formEditClient.get('photopermis').value || formEditClient.get('photoPassport').value || formEditClient.get('photoIdentite').value">
+                    <ion-label>
+                      Documents
+                    </ion-label>
+                  </ion-item-divider>
+
+                      <ion-list #listPhotoClient>
+                          <ion-button  [hidden]='disableItem' (click)="chooseAction('photoPassport')" color="light" expand="full" margin>Photo de passport <ion-icon slot="end" name="image"></ion-icon></ion-button>
+                          <ion-item-sliding *ngIf="formEditClient.get('photoPassport').value && formEditClient.get('photoPassport').value != ''" [disabled]='disableItem'>
+                            <ion-item>
+                              <ion-img *ngIf="!editedphotoPassport" src="https://spingorentcar.com/upload/{{formEditClient.get('photoPassport').value}}" ></ion-img>
+                              <ion-img *ngIf="!editedphotoPassport" src="{{formEditClient.get('photoPassport').value}}" ></ion-img>
+                            </ion-item>
+                            <ion-item-options side="end" *ngIf='disableItem'>
+                                <ion-item-option (click)="deletePhoto('photoPassport')" color="danger"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
+                              </ion-item-options>
+                          </ion-item-sliding>
+
+                          <ion-button  [hidden]='disableItem' (click)="chooseAction('photoIdentite')" color="light" expand="full" margin>Photo de CIN <ion-icon slot="end" name="image"></ion-icon></ion-button>
+                          <ion-item-sliding *ngIf="formEditClient.get('photoIdentite').value && formEditClient.get('photoIdentite').value !== ''" [disabled]='disableItem'>
+                            <ion-item>
+                                <ion-img *ngIf="!editedphotoIdentite" src="https://spingorentcar.com/upload/{{formEditClient.get('photoIdentite').value}}" ></ion-img>
+                                <ion-img *ngIf="!editedphotoIdentite" src="{{formEditClient.get('photoIdentite').value}}" ></ion-img>
+                            </ion-item>
+                            <ion-item-options side="end" *ngIf='disableItem'>
+                                <ion-item-option (click)="deletePhoto('photoIdentite')" color="danger"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
+                              </ion-item-options>
+                          </ion-item-sliding>
+
+                          <ion-button  [hidden]='disableItem' (click)="chooseAction('photopermis')" color="light" expand="full" margin>Photo de pérmis <ion-icon slot="end" name="image"></ion-icon></ion-button>
+                          <ion-item-sliding *ngIf="formEditClient.get('photopermis').value && formEditClient.get('photopermis').value != ''"  [disabled]='disableItem'>
+                            <ion-item>
+                                <ion-img *ngIf="!editedphotopermis" src="https://spingorentcar.com/upload/{{formEditClient.get('photopermis').value}}" ></ion-img>
+                                <ion-img *ngIf="!editedphotopermis" src="{{formEditClient.get('photopermis').value}}" ></ion-img>
+                            </ion-item>
+                            <ion-item-options side="end" *ngIf='disableItem'>
+                                <ion-item-option (click)="deletePhoto('photopermis')" color="danger"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
+                              </ion-item-options>
+                          </ion-item-sliding>
+                      </ion-list>
+                        
+                          
+                              
+                            
+
+          
+                      <ion-button type="submit" expand="full" *ngIf='!disableItem'>Enregistrer <ion-icon slot="end" name="save"></ion-icon></ion-button>
+        </form>
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Réglages
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Spingo Rent Car</ion-card-subtitle>
+      <ion-card-title>Yassine MOUGHNAGI</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <b>Email :</b> y.moughnagi@gmail.com<br />
+      <b>Username :</b> yassine
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-list  class="settings">
+    <ion-item (click)="changePasswd()">
+      <ion-label>Changer mot de passe</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list class="settings">
+    <ion-item (click)="contact()">
+      <ion-label>Nous contacter</ion-label>
+    </ion-item>
+    <ion-item (click)="inviteFriend()">
+      <ion-label>Envoyer à un ami</ion-label>
+    </ion-item>
+    <ion-item (click)="share()">
+      <ion-label>Partager</ion-label>
+    </ion-item>
+    
+  </ion-list>
+
+
+  <ion-list>
+      <ion-item (click)="logout()" color="danger" text-center>
+        <ion-label>DÉCONNEXION</ion-label>
+      </ion-item>
+    </ion-list>
+
+</ion-content>

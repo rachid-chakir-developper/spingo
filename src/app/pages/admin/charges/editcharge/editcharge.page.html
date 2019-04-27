@@ -1,0 +1,127 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [text]="''"></ion-back-button>
+          </ion-buttons>
+        <ion-title>
+          {{title}}
+        </ion-title>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content class="editCharge">
+    <form [formGroup]="formEditCharge" (ngSubmit)="updateCharge(formEditCharge)" *ngIf="chargeDetails">
+
+        <ion-grid no-padding>
+            <ion-item-divider no-padding>
+                <ion-label>
+                  Charge concernant
+                </ion-label>
+              </ion-item-divider>
+          <ion-row>
+              <ion-col>
+                  <ion-item (click)="presentModalVehiculeList()" [disabled]='disableItem'>
+                      <ion-label position="floating">Agence / Véhicule<ion-icon name="list" slot="end" size="small" *ngIf='!disableItem'></ion-icon></ion-label>
+                      <ion-input type="hidden" formControlName="vehicule"></ion-input>
+                      <ion-text>{{ vehiculeName }}</ion-text>
+                    </ion-item>
+                    <small>{{formErrors?.vehicule}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.libelle" [disabled]='disableItem'>
+                    <ion-label position="floating">Charge</ion-label>
+                    <ion-select formControlName="libelle" [hidden]="formEditCharge.get('vehicule').value != -2" *ngIf="formEditCharge.get('vehicule').value == -2">
+
+                        <ion-select-option value="Sous location" selected="selected">Sous location</ion-select-option>
+                        <ion-select-option value="Loyer">Loyer</ion-select-option>
+                        <ion-select-option value="Parking">Parking</ion-select-option>
+                        <ion-select-option value="Frais de téléphone">Frais de téléphone</ion-select-option>
+                        <ion-select-option value="Electricité">Electricité</ion-select-option>
+                        <ion-select-option value="CNSS">CNSS</ion-select-option>
+                        <ion-select-option value="Autres">Autres</ion-select-option>
+                        </ion-select>
+                                          <ion-select formControlName="libelle" [hidden]="formEditCharge.get('vehicule').value == -2" *ngIf="formEditCharge.get('vehicule').value != -2">
+                                              <ion-select-option value="Vidange" selected="selected">Vidange</ion-select-option>
+                                              <ion-select-option value="Visite technique">Visite technique</ion-select-option>
+                                              <ion-select-option value="Vignette" >Vignette</ion-select-option>
+                                              <ion-select-option value="Assurance" >Assurance</ion-select-option>
+                                              <ion-select-option value="GPS">GPS</ion-select-option>
+                                              <ion-select-option value="Autorisation de circulation">Autorisation de circulation</ion-select-option>
+                                              <ion-select-option value="Changement des pneus" >Changement des pneus</ion-select-option>
+                                              <ion-select-option value="Chaine distribution">Chaine distribution</ion-select-option>
+                                              <ion-select-option value="Freins" >Freins</ion-select-option>
+                                              <ion-select-option value="Autre charge de véhicule">Autre charge de véhicule</ion-select-option>
+                                            
+                                                                </ion-select>
+                  </ion-item>
+                  <small>{{formErrors?.libelle}}</small>
+            </ion-col>
+           
+          </ion-row>
+
+            <ion-item-divider no-padding>
+                <ion-label>
+                  Détails charge
+                </ion-label>
+              </ion-item-divider>
+          <ion-row>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.datecharge" [disabled]='disableItem'>
+                  <ion-label  position="floating">Date charge<ion-icon name="calendar" slot="end" size="small"></ion-icon></ion-label>
+                  <ion-datetime display-format="YYYY-MM-DD" picker-format="DD MMM YYYY" formControlName="datecharge"></ion-datetime>
+                </ion-item>
+                <small>{{formErrors?.datecharge}}</small>
+            </ion-col>
+            <ion-col>
+                <ion-item [class.error]="formErrors?.montant" [disabled]='disableItem'>
+                    <ion-label position="floating">Montant</ion-label>
+                    <ion-input formControlName="montant"></ion-input>
+                  </ion-item>
+                  <small>{{formErrors?.montant}}</small>
+            </ion-col>
+           
+          </ion-row>
+
+
+          <ion-row>
+              <ion-col>
+                  <ion-item [class.error]="formErrors?.typereglement" [disabled]='disableItem'>
+                      <ion-label position="floating">Type de réglement</ion-label>
+                      <ion-select okText="Ok" cancelText="Annuler" formControlName="typereglement">
+                        <ion-select-option value="Espèce">Espèce</ion-select-option>
+                        <ion-select-option value="Carte bancaire">Carte bancaire</ion-select-option>
+                        <ion-select-option value="Chèque">Chèque</ion-select-option>
+                        <ion-select-option value="TPE">TPE</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    <small>{{formErrors?.typereglement}}</small>
+              </ion-col>
+              <ion-col [hidden]="formEditCharge.get('typereglement').value != 'Chèque'">
+                  <ion-item [class.error]="formErrors?.numerocheque" [disabled]='disableItem'>
+                      <ion-label position="floating">N° chèque</ion-label>
+                      <ion-input formControlName="numerocheque"></ion-input>
+                    </ion-item>
+                    <small>{{formErrors?.numerocheque}}</small>
+              </ion-col>
+             
+          </ion-row>
+          <ion-item-divider no-padding>
+              <ion-label>
+                Détails et remarques
+              </ion-label>
+            </ion-item-divider>
+          <ion-row>
+              <ion-col>
+                  <ion-item [disabled]='disableItem'>
+                      <ion-label position="floating">Détails</ion-label>
+                      <ion-textarea formControlName="details"></ion-textarea>
+                    </ion-item>
+              </ion-col>
+          </ion-row>
+</ion-grid>
+<ion-button type="submit" expand="full" *ngIf='!disableItem'>Enregistrer <ion-icon slot="end" name="save"></ion-icon></ion-button>
+    </form>
+    </ion-content>
+    

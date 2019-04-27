@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Parc auto
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button  routerLink="/app/tabs/dashboard/vehicules/add">
+          <ion-icon name="add"></ion-icon> Ajouter
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-searchbar color="light" placeholder="Recherche" (ionChange)="filterVehicules()" [(ngModel)]="queryText"></ion-searchbar>
+  </ion-header>
+
+  <ion-content class="vehicules">
+
+      <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+          <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+  
+      <ion-list>
+          <ion-item-sliding *ngFor="let v of vehicules">
+            <ion-item no-padding routerLink="/app/tabs/dashboard/vehicules/show/{{v.id}}">
+                <ion-label padding-start padding-end>
+                    <h2>{{v.designation | titlecase}} {{v.marque | titlecase}}</h2>
+                    <h3>{{v.matricule}} - {{v.model}}</h3>
+                  </ion-label>
+                  <ion-icon slot="end" name="swap"></ion-icon>
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option><ion-icon name="create" size="large" routerLink="/app/tabs/dashboard/vehicules/edit/{{v.id}}"></ion-icon></ion-item-option>
+            </ion-item-options>
+            <!--
+            <ion-item-options side="start">
+              <ion-item-option (click)="presentAlertConfirm(v)" color="danger"><ion-icon name="trash" size="large"></ion-icon></ion-item-option>
+            </ion-item-options>
+            -->
+          </ion-item-sliding>
+        </ion-list>
+  
+  
+        <ion-infinite-scroll *ngIf="hasMore" threshold="100px" (ionInfinite)="getMoreVehicules($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Chargement en cours...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+  </ion-content>
